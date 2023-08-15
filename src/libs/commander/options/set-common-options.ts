@@ -10,7 +10,7 @@ export const setCommonOptions = (command: Command): Command => {
       'Specify the project associated with the files.',
     )
     .option(
-      '-e, --stage <stage>',
+      '-s, --stage <stage>',
       'Specify the stage (e.g., dev, prod, staging). Defaults to "default".',
       'default',
     )
