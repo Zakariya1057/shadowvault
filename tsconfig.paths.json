@@ -5,6 +5,9 @@
       "@src/*": [
         "src/*"
       ],
+      "@libs/*": [
+        "src/libs/*"
+      ],
       "@tests/*": [
         "tests/*"
       ]

@@ -8,10 +8,13 @@
     "shadowvault": "./dist/index.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.391.0",
+    "commander": "^11.0.0",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
+    "@types/commander": "^2.12.2",
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.4",
     "@typescript-eslint/eslint-plugin": "^6.1.0",

@@ -11,7 +11,7 @@ const config: Config.InitialOptions = {
     '@src/(.*)$': '<rootDir>/src/$1',
   },
   coverageReporters: ['text'],
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/index.ts'],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/register.ts'],
   coverageThreshold: {
     global: {
       branches: 50,

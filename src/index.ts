@@ -1,9 +1,13 @@
-// const { program } = require('commander')
-//
-// program.option('--first').option('-s, --separator <char>')
-//
-// program.parse()
-//
-// const options = program.opts()
-// const limit = options.first ? 1 : undefined
-// console.log(program.args[0].split(options.separator, limit))
+import { register } from './providers/register'
+import { setup } from '@libs/commander/setup'
+
+async function main(): Promise<void> {
+  await register()
+  const program = await setup()
+  program.parse()
+}
+
+main().catch((error) => {
+  console.error('Initialization error:', error)
+  process.exit(1)
+})
