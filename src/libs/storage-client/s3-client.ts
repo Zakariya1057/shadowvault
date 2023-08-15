@@ -7,8 +7,9 @@ import {
 } from '@aws-sdk/client-s3'
 import * as fs from 'fs'
 import { Readable } from 'stream'
+import { CloudStorageClient } from '@entities/cloud-storage-client'
 
-export class S3Client {
+export class S3Client implements CloudStorageClient {
   private client: S3
   private readonly bucket: string
 

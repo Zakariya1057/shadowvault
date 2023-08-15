@@ -1,4 +1,4 @@
-import { register } from './providers/register'
+import { register } from '@providers/register'
 import { setup } from '@libs/commander/setup'
 
 async function main(): Promise<void> {

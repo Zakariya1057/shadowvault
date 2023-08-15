@@ -1,5 +1,5 @@
-import { BaseOptions } from '@src/entities/base-options'
+import { CommandOptions } from '@entities/command-options'
 
-export const constructFolderName = (options: BaseOptions): string => {
+export const constructFolderName = (options: CommandOptions): string => {
   return `${options.name}/${options.stage}`
 }

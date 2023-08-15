@@ -1,5 +1,5 @@
-import { uploadCommand } from '@libs/commander/actions/upload'
-import { downloadCommand } from '@libs/commander/actions/download'
+import { uploadCommand } from '@libs/commander/actions/upload-command'
+import { downloadCommand } from '@libs/commander/actions/download-command'
 import { Command } from 'commander'
 
 export const setup = async (): Promise<Command> => {
@@ -7,9 +7,9 @@ export const setup = async (): Promise<Command> => {
 
   program
     .name('shadowvault')
-    .version('0.0.1')
+    .version('1.0.0')
     .description(
-      'ShadowVault - A CLI tool to manage environment files on AWS S3.',
+      'ShadowVault - A CLI tool to manage environment files on cloud storage.',
     )
     .addCommand(uploadCommand)
     .addCommand(downloadCommand)

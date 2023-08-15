@@ -1,6 +1,6 @@
 {
   "name": "shadowvault",
-  "version": "7.5.8",
+  "version": "1.0.0",
   "description": "Tool for managing env across multiple team members.",
   "main": "dist/index.js",
   "types": "dist/src/index.d.ts",
@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.391.0",
+    "@aws-sdk/signature-v4-crt": "^3.391.0",
+    "aws-crt": "^1.18.0",
     "commander": "^11.0.0",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13"

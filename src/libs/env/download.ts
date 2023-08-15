@@ -1,24 +1,26 @@
-import { BaseOptions } from '@src/entities/base-options'
-import { validateFilename } from '@src/utils/validators/validate-filename'
-import { ioc } from '@src/utils/ioc'
-import { S3Client } from '@libs/s3/s3-client'
-import { TYPES } from '@src/providers/types'
-import { constructFilename } from '@src/utils/file/construct-filename'
-import { extractFilename } from '@src/utils/file/extract-filename'
+import { validateFilename } from '@utils/validators/validate-filename'
+import { ioc } from '@utils/ioc'
+import { TYPES } from '@providers/types'
+import { constructFilename } from '@utils/file/construct-filename'
+import { extractFilename } from '@utils/file/extract-filename'
+import { CloudStorageClient } from '@entities/cloud-storage-client'
+import { CommandOptions } from '@entities/command-options'
 
 export const download = async (
   filename: string,
-  options: BaseOptions,
+  options: CommandOptions,
 ): Promise<void> => {
   validateFilename(filename)
 
   const location = constructFilename(filename, options)
 
   console.log(
-    `Initiating download of ${filename} from ${location} on AWS S3...`,
+    `Initiating download of ${filename} from ${location} on cloud storage...`,
   )
 
   const destination = extractFilename(filename)
 
-  await ioc.get<S3Client>(TYPES.Clients.S3).download(location, destination)
+  await ioc
+    .get<CloudStorageClient>(TYPES.Clients.Storage)
+    .download(location, destination)
 }

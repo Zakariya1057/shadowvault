@@ -1,11 +1,11 @@
 import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
-import { Config as ConfigEntity } from '@src/entities/config'
+import { Configuration } from '@entities/configuration'
 
 export class Config {
   private readonly configPath: string
-  private readonly config: ConfigEntity | null
+  private readonly config: Configuration | null
 
   constructor(customPath?: string) {
     this.configPath = customPath
@@ -19,7 +19,7 @@ export class Config {
     return filePath.endsWith('.json') ? filePath : `${filePath}.json`
   }
 
-  private loadConfig(filePath: string): ConfigEntity | null {
+  private loadConfig(filePath: string): Configuration | null {
     if (!fs.existsSync(filePath)) {
       console.warn(`Config file not found at ${filePath}`)
       return null
@@ -29,7 +29,14 @@ export class Config {
     return JSON.parse(rawData)
   }
 
-  public getConfig(): ConfigEntity | null {
+  public getConfig(): Configuration | null {
     return this.config
+  }
+
+  public setConfig<T extends keyof Configuration>(
+    key: T,
+    value: Configuration[T],
+  ): void {
+    this.config[key] = value
   }
 }

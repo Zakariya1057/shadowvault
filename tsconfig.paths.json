@@ -5,8 +5,17 @@
       "@src/*": [
         "src/*"
       ],
+      "@entities/*": [
+        "src/entities/*"
+      ],
       "@libs/*": [
         "src/libs/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@providers/*": [
+        "src/providers/*"
       ],
       "@tests/*": [
         "tests/*"

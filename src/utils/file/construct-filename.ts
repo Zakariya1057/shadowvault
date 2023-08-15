@@ -1,9 +1,9 @@
-import { BaseOptions } from '@src/entities/base-options'
-import { constructFolderName } from '@src/utils/file/construct-folder-name'
+import { constructFolderName } from '@utils/file/construct-folder-name'
+import { CommandOptions } from '@entities/command-options'
 
 export const constructFilename = (
   filename: string,
-  options: BaseOptions,
+  options: CommandOptions,
 ): string => {
   return `${constructFolderName(options)}/${filename}`
 }

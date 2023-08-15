@@ -1,6 +1,6 @@
 const TYPES = {
   Clients: {
-    S3: Symbol.for('S3Client'),
+    Storage: Symbol.for('StorageClient'),
   },
   Services: {
     Config: Symbol.for('ConfigService'),

@@ -1,24 +1,28 @@
-import { BaseOptions } from '@src/entities/base-options'
-import { validateFilename } from '@src/utils/validators/validate-filename'
-import { ioc } from '@src/utils/ioc'
-import { S3Client } from '@libs/s3/s3-client'
-import { TYPES } from '@src/providers/types'
-import { validateFileExists } from '@src/utils/validators/validate-file-exists'
-import { getFileContents } from '@src/utils/file/get-file-contents'
-import { constructFilename } from '@src/utils/file/construct-filename'
+import { validateFilename } from '@utils/validators/validate-filename'
+import { ioc } from '@utils/ioc'
+import { TYPES } from '@providers/types'
+import { validateFileExists } from '@utils/validators/validate-file-exists'
+import { getFileContents } from '@utils/file/get-file-contents'
+import { constructFilename } from '@utils/file/construct-filename'
+import { CloudStorageClient } from '@entities/cloud-storage-client'
+import { CommandOptions } from '@entities/command-options'
 
 export const upload = async (
   filename: string,
-  options: BaseOptions,
+  options: CommandOptions,
 ): Promise<void> => {
   validateFilename(filename)
   validateFileExists(filename)
 
   const location = constructFilename(filename, options)
 
-  console.log(`Initiating upload of ${filename} to ${location} on AWS S3...`)
+  console.log(
+    `Initiating upload of ${filename} to ${location} on cloud storage...`,
+  )
 
   const body = await getFileContents(filename)
 
-  await ioc.get<S3Client>(TYPES.Clients.S3).upload(location, body)
+  await ioc
+    .get<CloudStorageClient>(TYPES.Clients.Storage)
+    .upload(location, body)
 }

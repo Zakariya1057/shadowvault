@@ -1,10 +1,11 @@
 import { TYPES } from '../types'
-import { S3Client } from '@src/libs/s3/s3-client'
-import { ioc } from '@src/utils/ioc'
+import { S3Client } from '@libs/storage-client/s3-client'
+import { ioc } from '@utils/ioc'
 import { S3ClientConfig } from '@aws-sdk/client-s3'
 import { Config } from '@libs/config/config'
+import { CloudStorageClient } from '@entities/cloud-storage-client'
 
-export const register = async () => {
+export const register = () => {
   const { aws } = ioc.get<Config>(TYPES.Services.Config).getConfig()
 
   const config: S3ClientConfig = {
@@ -15,6 +16,6 @@ export const register = async () => {
     region: aws.region,
   }
 
-  const client = new S3Client(config, 'shadowvault-env')
-  ioc.bind<S3Client>(TYPES.Clients.S3).toConstantValue(client)
+  const client = new S3Client(config, aws.bucket)
+  ioc.bind<CloudStorageClient>(TYPES.Clients.Storage).toConstantValue(client)
 }
