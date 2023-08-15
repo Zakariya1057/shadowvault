@@ -40,7 +40,7 @@ To utilize ShadowVault with AWS S3, set up a dedicated S3 bucket and IAM user:
 
 ### Creating an S3 Bucket
 
-1. Create an AWS S3 bucket named `shadowvault-env`. This is the default in `~/.shadowvault/config.json`.
+1. Create an AWS S3 bucket named `shadowvault`. This is the default in `~/.shadowvault/config.json`.
   - _Note:_ If you choose a different name, ensure it matches your configuration.
 
 ### Setting Up an IAM User
@@ -51,7 +51,28 @@ To utilize ShadowVault with AWS S3, set up a dedicated S3 bucket and IAM user:
 4. Name your user.
 5. For permissions, select **Attach existing policies directly**.
 6. Click **Create Policy** and switch to the **JSON** tab.
-  - Paste the required policy, adjusting `shadowvault-env` if you used a different bucket name.
+  - Paste the required policy, adjusting `shadowvault` if you used a different bucket name.
+
+```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+    {
+      "Sid": "ListBuckets",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::shadowvault"
+    },
+    {
+      "Sid": "AllObjectActions",
+      "Effect": "Allow",
+      "Action": "s3:*Object",
+      "Resource": "arn:aws:s3:::shadowvault/*"
+      }
+    ]
+  }
+```
+
 7. Name your policy, e.g., `ShadowVaultS3BucketPolicy`.
 8. Click **Create Policy**.
 9. Return to the user creation, refresh to see your policy, select it, and proceed.
@@ -60,8 +81,9 @@ To utilize ShadowVault with AWS S3, set up a dedicated S3 bucket and IAM user:
 ### Retrieving AWS Credentials for ShadowVault
 
 1. In IAM, click your user.
-2. Under **Security credentials**, click **Create access key**.
-3. Copy the displayed **Access key ID** and **Secret access key** immediately.
+2. Under **Security credentials**, scroll down and click **Create access key**.
+3. Press the local code option and proceed to create the access key.
+4. Copy the displayed **Access key ID** and **Secret access key**.
 
 ### Creating ShadowVault Configuration
 
@@ -88,7 +110,7 @@ Populate the file with the following content:
 Replace the placeholders:
 1. YOUR_ACCESS_KEY_ID: Your AWS access key ID.
 2. YOUR_SECRET_ACCESS_KEY: Your AWS secret access key.
-3. YOUR_AWS_REGION: The AWS region for your S3 bucket (e.g., us-west-2, eu-west-1).
+3. YOUR_AWS_REGION: The AWS region for your S3 bucket (e.g., eu-west-2, eu-west-1).
 4. YOUR_BUCKET_NAME: The name of your S3 bucket. We recommend using `shadowvault` as the bucket name for consistency.
 
 Ensure that your configuration is accurate to ensure seamless communication with your AWS resources.

@@ -19,10 +19,9 @@ export class Config {
     return filePath.endsWith('.json') ? filePath : `${filePath}.json`
   }
 
-  private loadConfig(filePath: string): Configuration | null {
+  private loadConfig(filePath: string): Configuration {
     if (!fs.existsSync(filePath)) {
-      console.warn(`Config file not found at ${filePath}`)
-      return null
+      throw new Error(`Config file not found at ${filePath}`)
     }
 
     const rawData = fs.readFileSync(filePath, 'utf-8')

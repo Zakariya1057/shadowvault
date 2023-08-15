@@ -9,6 +9,6 @@ export const handleSpecificFiles = (
   if (files && files.length) {
     files.forEach((file) => action(file, options))
   } else {
-    console.error('Please specify files or use the --all flag.')
+    throw new Error('Please specify files or use the --all flag.')
   }
 }

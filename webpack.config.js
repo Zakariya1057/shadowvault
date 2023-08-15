@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   target: 'node',
@@ -27,6 +28,9 @@ module.exports = {
       '@tests': path.resolve(__dirname, 'tests/'),
     },
   },
+  plugins: [
+    new webpack.BannerPlugin({ banner: '#!/usr/bin/env node', raw: true }),
+  ],
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),

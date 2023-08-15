@@ -1,23 +1,32 @@
 import type { Config } from '@jest/types'
 
 const config: Config.InitialOptions = {
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>/tests'],
   verbose: true,
   modulePaths: ['<rootDir>'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
   moduleNameMapper: {
-    '@src/(.*)$': '<rootDir>/src/$1',
+    '^@src/(.*)$': '<rootDir>/src/$1',
+    '^@entities/(.*)$': '<rootDir>/src/entities/$1',
+    '^@libs/(.*)$': '<rootDir>/src/libs/$1',
+    '^@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^@providers/(.*)$': '<rootDir>/src/providers/$1',
+    '^@tests/(.*)$': '<rootDir>/tests/$1',
   },
   coverageReporters: ['text'],
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/register.ts'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/providers/**/*.{ts,tsx}',
+    '!src/entities/**/*.{ts,tsx}',
+  ],
   coverageThreshold: {
     global: {
-      branches: 50,
-      functions: 50,
-      lines: 50,
-      statements: 50,
+      branches: 87,
+      functions: 89,
+      lines: 96,
+      statements: 97,
     },
   },
 }
